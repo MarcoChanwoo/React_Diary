@@ -22,15 +22,15 @@ export const getEmotionImgById = (emotionId) => {
   }
 };
 
-export const getFormattedDate=(targetDate)=>{
-  let year=targetDate.getFullYear();
-  let month=targetDate.getMonth()+1;
-  let date=targetDate.getDate();
-  if(month<10){
-    month=`0${month}`;
+export const getFormattedDate = (targetDate) => {
+  let year = targetDate.getFullYear();
+  let month = targetDate.getMonth() + 1;
+  let date = targetDate.getDate();
+  if (month < 10) {
+    month = `0${month}`;
   }
-  if(date<10){
-    date=`0${date}`;
+  if (date < 10) {
+    date = `0${date}`;
   }
   return `${year}-${month}-${date}`;
 };
@@ -38,7 +38,7 @@ export const getFormattedDate=(targetDate)=>{
 export const emotionList = [
   {
     id: 1,
-    name: "완전 좋음!",
+    name: "완전 좋음",
     img: getEmotionImgById(1),
   },
   {
@@ -64,7 +64,11 @@ export const emotionList = [
 ];
 
 export const getMonthRangeByDate = (date) => {
-  const beginTimeStamp = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
+  const beginTimeStamp = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  ).getTime();
   const endTimeStamp = new Date(
     date.getFullYear(),
     date.getMonth() + 1,

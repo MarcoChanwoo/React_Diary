@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./DiaryItem.css";
 import { getEmotionImgById } from "../util";
@@ -8,10 +9,9 @@ const DiaryItem = ({ id, emotionId, content, date }) => {
   const goDetail = () => {
     navigate(`/diary/${id}`);
   };
-  const goEdit=()=>{ // 수정작업
+  const goEdit = () => {
     navigate(`/edit/${id}`);
-  }; 
-
+  };
   return (
     <div className="DiaryItem">
       <div
@@ -32,4 +32,5 @@ const DiaryItem = ({ id, emotionId, content, date }) => {
     </div>
   );
 };
-export default DiaryItem;
+
+export default React.memo(DiaryItem);

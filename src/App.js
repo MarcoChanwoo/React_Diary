@@ -1,38 +1,15 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import './App.css';
+import React, { useReducer, useRef, useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import "./App.css";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Diary from "./pages/Diary";
 import Edit from "./pages/Edit";
-import React, { useEffect, useReducer, useRef, useState } from 'react';
-
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "INIT": {
-      return action.data;
-    }
-    case "CREATE": {
-      return [action.data, ...state];
-    }
-    default: {
-      return state;
-    }
-    case "UPDATE": {
-      return state.map((it) =>
-        String(it.id) === String(action.data.id) ? { ...action.data } : it
-      );
-    }
-    case "DELETE": {
-      return state.filter((it) => String(it.id) !== String(action.targetId));
-    }
-  }
-}
 
 const mockData = [
   {
     id: "mock1",
-    date: new Date().getTime() - 1, // -n: 날짜값 최신/오래된 순을 정렬하기 위해 사용
+    date: new Date().getTime() - 1,
     content: "mock1",
     emotionId: 1,
   },
@@ -49,6 +26,31 @@ const mockData = [
     emotionId: 3,
   },
 ];
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "INIT": {
+      return action.data;
+    }
+    case "CREATE": {
+      return [action.data, ...state];
+    }
+    case "UPDATE": {
+      return state.map((it) =>
+        String(it.id) === String(action.data.id) ? { ...action.data } : it
+      );
+    }
+    case "DELETE": {
+      return state.filter((it) => String(it.id) !== String(action.targetId));
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
 
 function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -79,7 +81,7 @@ function App() {
   const onUpdate = (targetId, date, content, emotionId) => {
     dispatch({
       type: "UPDATE",
-      date: {
+      data: {
         id: targetId,
         date: new Date(date).getTime(),
         content,
@@ -96,7 +98,7 @@ function App() {
   };
 
   if (!isDataLoaded) {
-    return <div>데이터 로딩중입니다.</div>;
+    return <div>데이터를 불러오는 중입니다</div>;
   } else {
     return (
       <DiaryStateContext.Provider value={data}>
@@ -109,10 +111,10 @@ function App() {
         >
           <div className="App">
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/new' element={<New />} />
-              <Route path='/diary/:id' element={<Diary />} />
-              <Route path='/edit/:id' element={<Edit />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/new" element={<New />} />
+              <Route path="/diary/:id" element={<Diary />} />
+              <Route path="/edit/:id" element={<Edit />} />
             </Routes>
           </div>
         </DiaryDispatchContext.Provider>
@@ -120,7 +122,4 @@ function App() {
     );
   }
 }
-
-export const DiaryStateContext = React.createContext();
-export const DiaryDispatchContext = React.createContext();
 export default App;

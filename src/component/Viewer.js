@@ -1,5 +1,5 @@
-import { emotionList } from "../util";
 import "./Viewer.css";
+import { emotionList } from "../util";
 
 const Viewer = ({ content, emotionId }) => {
   const emotionItem = emotionList.find((it) => it.id === emotionId);
@@ -16,7 +16,7 @@ const Viewer = ({ content, emotionId }) => {
           ].join(" ")}
         >
           <img alt={emotionItem.name} src={emotionItem.img} />
-          <div className="emotion_img_descript">{emotionItem.name}</div>
+          <div className="emotion_descript">{emotionItem.name}</div>
         </div>
       </section>
       <section>
@@ -26,6 +26,6 @@ const Viewer = ({ content, emotionId }) => {
         </div>
       </section>
     </div>
-  )
+  );
 };
 export default Viewer;

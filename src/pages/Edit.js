@@ -31,25 +31,25 @@ const Edit = () => {
     navigate(-1);
   };
 
-  if (!data) {
-    return <div>Loading diaries..</div>;
-  } else {
-    return (
-      <div>
-        <Header
-          title={"일기 수정하기"}
-          leftChild={<Button text={"<뒤로 가기"} onClick={goBack} />}
-          rightChild={
-            <Button
-              type={"negative"}
-              text={"삭제하기"}
-              onClick={onClickDelete}
-            />
-          }
-        />
-        <Editor initData={data} onSubmit={onSubmit} />
-      </div>
-    );
-  }
+if (!data) {
+  return <div>일기를 불러오고 있습니다...</div>;
+} else {
+  return (
+    <div>
+      <Header
+        title={"일기 수정하기"}
+        leftChild={<Button text={"< 뒤로 가기"} onClick={goBack} />}
+        rightChild={
+          <Button
+            type={"negative"}
+            text={"삭제하기"}
+            onClick={onClickDelete}
+          />
+        }
+      />
+      <Editor initData={data} onSubmit={onSubmit} />
+    </div>
+  );
+}
 };
 export default Edit;

@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { DiaryStateContext } from "../App";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { DiaryStateContext } from "../App";
 const useDiary = (id) => {
   const data = useContext(DiaryStateContext);
   const [diary, setDiary] = useState();
@@ -12,7 +11,7 @@ const useDiary = (id) => {
     if (matchDiary) {
       setDiary(matchDiary);
     } else {
-      alert("Diary doesn't exist.");
+      alert("일기가 존재하지 않습니다");
       navigate("/", { replace: true });
     }
   }, [id, data]);
